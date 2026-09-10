@@ -43,3 +43,21 @@ cookie-parser: Helps Express read cookies from incoming requests.
 
 # Middleware:
  A function that runs between the client request and the server response to perform tasks like authentication, logging,admin, CORS, or parsing data.
+
+ # asyncHandler
+ . Controller ko run karna aur agar usme error aaye to automatically Express ke error handler tak pahunchana.
+
+ . asyncHandler is a wrapper that automatically catches async errors and passes them to Express's error handler.
+
+ . Promise.resolve() = Handle the result as a Promise.
+
+ . requestHandler() runs the function → Promise.resolve() handles its Promise → .catch() catches errors → next(err) sends the error to Express.
+
+ # promise use
+ . Promise is used here so that async errors can be caught and passed to Express using next(err).
+
+ # apierror 
+ ApiError ek custom Error class hai jo API error ko statusCode, message, errors, success aur stack ke proper format me store karti hai.
+
+ # apiresponse
+ ApiResponse successful API response ko standard format me rakhta hai: statusCode + data + message + success.
