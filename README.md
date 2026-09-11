@@ -77,3 +77,37 @@ Aggregation ka simple meaning hai: multiple data/items ko combine karke ek meani
 
 MongoDB me Aggregation
 MongoDB me Aggregation Pipeline ka use data ko filter, group, sort, calculate, etc. karne ke liye hota hai.
+
+# npm i bcrypt jsonwebtoken
+
+# bcrypt 
+bcrypt ek library/algorithm hai jo passwords ko securely hash karne ke liye use hota hai.
+
+password: "Rahul123"  -> password: "$2b$10$..."
+
+
+# josn web token
+
+JWT (JSON Web Token) ek token hota hai jo website/app me user ki identity verify (authentication) karne ke liye use hota hai.
+
+Email + Password
+       ↓
+    Backend
+       ↓
+Password correct ✅
+       ↓
+   JWT Token
+       ↓
+     Client
+
+
+🔐 bcrypt = Password ko secure karna
+🎫 JWT = Login ke baad user ko identify/verify karna
+
+# pre
+Database operation hone se pehle kuch code run karna.
+
+Ye actually Mongoose middleware (hook) hai, MongoDB ka direct command nahi.
+
+pre("save") = save se pehle code chalao
+bcrypt = password ko securely hash karo
