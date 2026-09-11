@@ -61,3 +61,19 @@ cookie-parser: Helps Express read cookies from incoming requests.
 
  # apiresponse
  ApiResponse successful API response ko standard format me rakhta hai: statusCode + data + message + success.
+
+ # BSON
+ BSON = Binary JSON
+
+MongoDB data ko internally BSON (Binary JSON) format me store karta hai. BSON, JSON jaisa hi hai, lekin usme additional data types hote hain aur data binary representation me store hota hai.
+
+JSON = representation
+BSON = MongoDB's binary document format
+ObjectId = BSON data type
+
+# npm install aggregation
+
+Aggregation ka simple meaning hai: multiple data/items ko combine karke ek meaningful result banana.
+
+MongoDB me Aggregation
+MongoDB me Aggregation Pipeline ka use data ko filter, group, sort, calculate, etc. karne ke liye hota hai.
