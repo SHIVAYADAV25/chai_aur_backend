@@ -33,9 +33,9 @@ const app = express()
             throw error 
         })
 
-        app.listen(process.env.POST,(=>{
+        app.listen(process.env.POST,()=>{
             console.log(`App is listening on port${process.env.POST}`);
-        }))
+        })
     } catch (error) {
         console.error("Error",error);
         throw err

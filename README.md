@@ -15,6 +15,20 @@ Dotenv is a zero-dependency module that loads environment variables from a .env 
 
  # Word Wrap ON - alt + Z
 
+ # Prettier 
+ Prettier ek code formatter hai, jo programming code ko automatically clean aur consistent format mein arrange karta hai.
+ Prettier generally devDependency hota hai.
+ npm i -D prettier
+
+ singleQuote: false	     "double quotes"
+ bracketSpacing: true     { name: "Rahul" }
+ tabWidth: 2	            2 spaces indentation
+ trailingComma: "es5"     Last item ke baad comma
+ semi: true	            Statement ke end mein ;
+
+ const user={name:"Rahul",age:20}
+ const user = { name: "Rahul", age: 20 };
+
  # process.exit()
 
  process.exit(1) immediately stops the Node.js program and indicates that the program ended because of an error.
@@ -32,6 +46,7 @@ process.exit(1);  -> Error/Failure
 # CORS = Cross-Origin Resource Sharing
 
 Jab frontend aur backend different origin par run kar rahe hote hain, browser security ke wajah se request ko block kar sakta hai.
+app.use(...) → Express app mein middleware ya router ko register/mount karne ke liye.
 
 CORS: Allows requests from a different origin (frontend) to the backend.
 
@@ -111,3 +126,14 @@ Ye actually Mongoose middleware (hook) hai, MongoDB ka direct command nahi.
 
 pre("save") = save se pehle code chalao
 bcrypt = password ko securely hash karo
+
+# terminal se file aur folder banana
+
+folder - > mkdir  folder1 , folder2 ....
+file -> touch filefirst , filesecond ,...
+
+## npm i cloudinary multer
+
+Multer → user se aayi file ko backend me receive/handle karta hai.
+
+Cloudinary → us file ko cloud/server par upload aur store karta hai.

@@ -52,6 +52,7 @@ const userSchema = new Schema(
     }
 )
 
+// password = shiva123  -> @%$dg35fdS
 userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next();
 
@@ -59,6 +60,7 @@ userSchema.pre("save", async function (next) {
     next()
 })
 
+// compare shiva123  == @%$dg35fdS  true false
 userSchema.methods.isPasswordCorrect = async function(password){
     return await bcrypt.compare(password, this.password)
 }
