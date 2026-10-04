@@ -142,3 +142,4 @@ env file me ->
 CLOUDINARY_CLOUD_NAME=shivayadav //Settings → Product Environments
 CLOUDINARY_API_KEY=your_new_api_key // cloudinary ->Settings → API Keys 
 CLOUDINARY_API_SECRET=your_new_api_secret
+
