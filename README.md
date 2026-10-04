@@ -137,3 +137,8 @@ file -> touch filefirst , filesecond ,...
 Multer → user se aayi file ko backend me receive/handle karta hai.
 
 Cloudinary → us file ko cloud/server par upload aur store karta hai.
+
+env file me ->
+CLOUDINARY_CLOUD_NAME=shivayadav //Settings → Product Environments
+CLOUDINARY_API_KEY=your_new_api_key // cloudinary ->Settings → API Keys 
+CLOUDINARY_API_SECRET=your_new_api_secret
