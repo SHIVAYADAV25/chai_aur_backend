@@ -24,3 +24,6 @@ const uploadCloudinary = async (localFilePath) => {
     fs.unlinkSync(localFilePath) // remove the locally saved temporay file as the upload operation got failed
   }
 }
+
+
+export {uploadCloudinary}
