@@ -3,6 +3,7 @@ import {ApiError} from "../utils/ApiError.js"
 import {User} from "../models/user.models.js"
 import { uploadCloudinary } from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js";
+import fs from "fs";
 
 const registerUser = asyncHandler(async (req , res) => {
     // get user details from frontend
@@ -37,8 +38,13 @@ const registerUser = asyncHandler(async (req , res) => {
 
     //check for images,check for avatar
     const avatarLocalPath = req.files?.avatar?.[0]?.path;
-    const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
+    //const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
     
+    let coverImageLocalPath;
+
+    if(req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0){
+        coverImageLocalPath = req.files.coverImage[0].path;
+    }
 
     if(!avatarLocalPath) {
         throw new ApiError(400,"Avatar file is required")
@@ -49,8 +55,8 @@ const registerUser = asyncHandler(async (req , res) => {
 
     console.log("FILES:", req.files);
 
-    if(!avatar){
-        throw new ApiError(400,"Avatar file is required")
+    if (!avatar) {
+      throw new ApiError(500, "Avatar upload failed. Check Cloudinary logs.");
     }
     
     // upload them to cloudinary , avatar

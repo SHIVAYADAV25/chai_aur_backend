@@ -5,6 +5,10 @@ const storage = multer.diskStorage({
     cb(null, "./public/temp")
   },
   filename: function (req, file, cb) {
+    console.log("Incoming filename:", file.originalname);
+    console.log("Incoming mimetype:", file.mimetype);
+    console.log("Incoming encoding:", file.encoding);
+    
       cb(null, file.originalname);
   }
 })

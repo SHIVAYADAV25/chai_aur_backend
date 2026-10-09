@@ -1,39 +1,37 @@
+
 import { v2 as cloudinary } from "cloudinary";
-import fs from "fs"
+import fs from "fs";
+import path from "path";
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-
 const uploadCloudinary = async (localFilePath) => {
-  try {
+    try {
+        if (!localFilePath) return null;
 
-     const fileStats = fs.statSync(localFilePath);
-     console.log("File size:", fileStats.size);
+        const absolutePath = path.resolve(localFilePath);
 
-    if(!localFilePath) return null;
-    // upload the file on cloudinary
-    const response = await cloudinary.uploader.upload(
-      localFilePath,
-      {
-        resource_type:"image"
-      }
-    )
+        console.log("Uploading:", absolutePath);
+        console.log("First 8 bytes:",
+            fs.readFileSync(absolutePath).subarray(0, 8).toString("hex")
+        );
 
-    //file has been uploaded successfull
-    console.log("file is uploaded on cloudinary",response.url);
+        const response = await cloudinary.uploader.upload(
+            absolutePath,
+            { resource_type: "image" }
+        );
 
-    return response;
+        console.log("Upload success:", response.secure_url);
+        return response;
 
-  } 
-  catch (error) {
-    console.log("Cloudinary upload error:", error);
-    return null;
-  }
-}
+    } catch (error) {
+        console.log("Cloudinary error:", error.message);
+        return null;
+    }
+};
 
-
-export {uploadCloudinary}
+export { uploadCloudinary };
