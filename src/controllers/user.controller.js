@@ -256,14 +256,18 @@ const changeCurrentPassword = asyncHandler(async(req,res)=>{
 
     return res
     .status(200)
-    .json(new ApiResponse(200,"Password change Successfully"))
+    .json(new ApiResponse(200,{},"Password change Successfully"))
 })
 
 // get current user
 const getCurrentUser = asyncHandler(async(req,res) =>{
     return res
     .status(200)
-    .json(200,req.user,"current user fetched successfully")
+    .json(new ApiResponse(
+        200,
+        req.user,
+        "current user fetched successfully"
+    ))
 })
 
 const updateAccountDetails = asyncHandler(async(req,res) =>{
@@ -303,6 +307,15 @@ const updateUserAvatar = asyncHandler(async(req,res)=>{
         throw new ApiError(400,"Error while uploading on avatar")
     }
 
+    // Get the old avatar URL before updating
+    const existingUser = await User.findById(req.user?._id);
+
+    if (!existingUser) {
+        throw new ApiError(404, "User not found");
+    }
+
+    const oldAvatarUrl = existingUser.avatar;
+
     const user =  await User.findByIdAndUpdate(
         req.user?._id,
         {
@@ -313,6 +326,19 @@ const updateUserAvatar = asyncHandler(async(req,res)=>{
         {new :true}
 
     ).select("-password")
+
+    // Delete old avatar from Cloudinary
+    if (oldAvatarUrl && oldAvatarUrl !== avatar.url) {
+        try {
+            const oldPublicId = extractPublicId(oldAvatarUrl);
+
+            if (oldPublicId) {
+                await cloudinary.uploader.destroy(oldPublicId);
+            }
+        } catch (error) {
+            console.error("Error deleting old avatar:", error);
+        }
+    }
 
     return res
     .status(200)
