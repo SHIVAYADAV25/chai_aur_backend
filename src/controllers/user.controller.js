@@ -16,12 +16,17 @@ const generateAccessAndRefereshTokens = async(userId)=>
         const refreshToken = user.generateRefreshToken();
         
         user.refreshToken = refreshToken
-        await user.save({ validateBeforeSave })
+        await user.save({ validateBeforeSave : false })
 
         return { accessToken , refreshToken };
 
     } catch (error) {
-        throw new ApiError(500,"Something went wrong while generating refresh and access token")
+        console.error("TOKEN GENERATION ERROR:", error);
+
+       throw new ApiError(
+          500,
+          error.message || "Token generation failed"
+        );
     }
 }
 
@@ -122,7 +127,7 @@ const loginUser = asyncHandler(async (req,res) =>{
         throw new ApiError(400,"username or email is required")
     }
 
-    const user = User.findOne({
+    const user = await User.findOne({
         $or:[{username},{email}]
     })
 
@@ -130,7 +135,7 @@ const loginUser = asyncHandler(async (req,res) =>{
         throw new ApiError(404,"User does not exist")
     }
 
-    const isPasswordValid = user.isPasswordCorrect(password)
+    const isPasswordValid = await user.isPasswordCorrect(password)
 
     if(!isPasswordValid){
         throw new ApiError(401,"Incorrect password || Try again!")

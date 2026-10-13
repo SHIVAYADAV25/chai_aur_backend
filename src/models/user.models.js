@@ -53,7 +53,7 @@ const userSchema = new Schema(
 )
 
 // password = shiva123  -> @%$dg35fdS
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
     if(!this.isModified("password")) return ;
 
     this.password = await bcrypt.hash(this.password, 10)

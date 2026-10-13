@@ -24,5 +24,3 @@ Example: POST /api/v1/users/register → Send request → Receive JSON response.
 
 https://github_url_terminal_post/api/v1/users/register
 
-## hoppscotch
-// https://hoppscotch.io/ api check karo
